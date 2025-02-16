@@ -9,9 +9,8 @@ const Home = () => {
 
    const {search } = useLocation();
    let category = decodeURIComponent(search.split('=')[1])
-  //  console.log(category)
 
-   const [filterProducts ,setfilterProducts] = useState(products)
+   const [filterProducts ,setfilterProducts] = useState()
 
    const productgetcategory = async () => {
     try {
@@ -24,27 +23,27 @@ const Home = () => {
    }
 
    useEffect(()=>{
-    if(category.length > 0) productgetcategory();
-   },[category])
+    if(!filterProducts || category === "undefined") setfilterProducts(products)
+    if(category != "undefined") productgetcategory();
+   },[category,products])
 
-console.log(filterProducts);
 
 
   return products ? (
     <>
       <Navbar />
-      <div className=" w-[85%] h-full flex gap-10 flex-wrap p-10">
+      <div className=" w-[85%] h-full flex gap-2 flex-wrap p-20">
         {filterProducts && filterProducts.map((p, i) => (
           <Link key={i}
             to={`/Details/${p.id}`}
             className="w-[17vw] h-[45vh] p-3 rounded border-2 border-zinc-300 flex flex-col items-center ">
-              <div className="flex justify-between flex-col h-[100%] items-center">
+              <div className="flex flex-col h-[100%] items-center justify-around overflow-hidden">
             <img
-              className="w-[65%] hover:scale-110 bg-contain bg-no-repeat bg-center "
+              className="w-[60%] hover:scale-110 bg-contain bg-no-repeat bg-center "
               src={p.image}
               alt=""
             />
-            <h1 className="mt-5 text-lg font-semibold hover:text-blue-300 ">
+            <h1 className="mt-5 text-lg font-semibold   hover:text-blue-300 ">
               {p.title}
             </h1>
             </div>

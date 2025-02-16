@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../utils/Contex";
 import { Link } from "react-router-dom";
+import Creat from "./Creat";
 
 const Navbar = () => {
   const [products] = useContext(ProductContext);
@@ -18,9 +19,10 @@ const Navbar = () => {
   return (
     <nav className="bg-zinc-200 w-[17vw] h-[250%] flex flex-col items-center justify-start pt-5 ">
       <div>
-        <button className="border-2 border-blue-300 px-2 py-1 rounded">
+      
+        <Link to={"/Creat"}  className="border-2 border-blue-300 px-2 py-1 rounded mt-10">
           Add New Product
-        </button>
+        </Link >
       </div>
       <hr className="w-[80%] my-2 " />
         <h1 className="text-xl font-semibold mb-2">Category Filter</h1>
